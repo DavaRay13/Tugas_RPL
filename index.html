@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dava Corporation | Solusi Masa Depan</title>
+    <!-- Import Google Fonts buat typography yang lebih elegan -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Import FontAwesome buat ikon-ikon keren -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* === CSS RESET & VARIABLES === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary-color: #0f172a; /* Warna gelap biru/hitam elegan */
+            --accent-color: #3b82f6; /* Warna biru cerah buat tombol/highlight */
+            --text-dark: #333;
+            --text-light: #f8fafc;
+            --bg-light: #f1f5f9;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* === NAVIGATION BAR === */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* === HERO SECTION === */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80') center/cover;
+            color: var(--text-light);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+            color: #cbd5e1;
+            animation: fadeInUp 1s ease;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #2563eb;
+            transform: translateY(-3px);
+        }
+
+        /* === ABOUT SECTION === */
+        .section-padding {
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: #475569;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* === SERVICES SECTION === */
+        .services {
+            background-color: var(--bg-light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .service-card p {
+            color: #64748b;
+        }
+
+        /* === CONTACT SECTION === */
+        .contact-container {
+            display: flex;
+            gap: 50px;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            width: 20px;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            padding: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 5px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--accent-color);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-form button {
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === RESPONSIVE DESIGN (MOBILE) === */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .about-content, .contact-container { flex-direction: column; }
+            nav ul { display: none; /* Idealnya pakai hamburger menu buat mobile, diumpetin dulu sbg basic */ }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGASI -->
+    <nav>
+        <div class="logo">DAVA<span>CORP</span></div>
+        <ul>
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#tentang">Tentang Kami</a></li>
+            <li><a href="#layanan">Layanan</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION (BERANDA) -->
+    <section id="beranda" class="hero">
+        <h1>Inovasi Untuk Masa Depan</h1>
+        <p>Dava Corporation hadir untuk membantu bisnis Anda berkembang melalui solusi teknologi dan strategi digital yang revolusioner.</p>
+        <a href="#layanan" class="btn">Lihat Layanan Kami</a>
+    </section>
+
+    <!-- TENTANG KAMI SECTION -->
+    <section id="tentang" class="section-padding">
+        <h2 class="section-title">Tentang Kami</h2>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Tim Dava Corporation">
+            </div>
+            <div class="about-text">
+                <p><strong>Dava Corporation</strong> didirikan dengan satu visi utama: Menjadi katalisator pertumbuhan bagi bisnis di era digital. Kami percaya bahwa setiap masalah memiliki solusi inovatif yang menunggu untuk ditemukan.</p>
+                <p>Dengan tim yang terdiri dari para profesional muda yang berdedikasi, kami menggabungkan kreativitas, teknologi, dan strategi bisnis untuk menghasilkan produk dan layanan yang tidak hanya fungsional, tetapi juga memberikan dampak nyata bagi klien kami.</p>
+                <a href="#kontak" class="btn" style="margin-top: 15px;">Mari Berdiskusi</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAYANAN SECTION -->
+    <section id="layanan" class="services section-padding">
+        <h2 class="section-title">Layanan Kami</h2>
+        <div class="services-grid">
+            <!-- Layanan 1 -->
+            <div class="service-card">
+                <i class="fa-solid fa-code"></i>
+                <h3>Pengembangan Web</h3>
+                <p>Kami membangun website yang cepat, aman, dan responsif untuk memperkuat identitas digital brand Anda di internet.</p>
+            </div>
+            <!-- Layanan 2 -->
+            <div class="service-card">
+                <i class="fa-solid fa-chart-line"></i>
+                <h3>Konsultasi Bisnis</h3>
+                <p>Membantu memecahkan masalah operasional dan merancang strategi bisnis yang efektif untuk meningkatkan keuntungan.</p>
+            </div>
+            <!-- Layanan 3 -->
+            <div class="service-card">
+                <i class="fa-solid fa-bullhorn"></i>
+                <h3>Pemasaran Digital</h3>
+                <p>Kampanye digital terarah melalui SEO, Media Sosial, dan periklanan untuk menjangkau target audiens yang tepat.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAK SECTION -->
+    <section id="kontak" class="section-padding">
+        <h2 class="section-title">Hubungi Kami</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Mari Mulai Proyek Anda</h3>
+                <p>Punya ide cemerlang atau masalah yang butuh solusi? Jangan ragu untuk menghubungi tim Dava Corporation. Kami siap mendengarkan.</p>
+                <br>
+                <p><i class="fa-solid fa-location-dot"></i> Jl. Inovasi Teknologi No. 88, Jakarta</p>
+                <p><i class="fa-solid fa-envelope"></i> halo@davacorp.com</p>
+                <p><i class="fa-solid fa-phone"></i> +62 812 3456 7890</p>
+            </div>
+            <div class="contact-form">
+                <form onsubmit="event.preventDefault(); alert('Pesan berhasil dikirim! (Ini cuma simulasi ya bro)');">
+                    <input type="text" placeholder="Nama Lengkap" required>
+                    <input type="email" placeholder="Alamat Email" required>
+                    <textarea placeholder="Pesan atau Pertanyaan Anda..." required></textarea>
+                    <button type="submit" class="btn">Kirim Pesan <i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Dava Corporation. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
