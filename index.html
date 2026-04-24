@@ -3,101 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dava Corporation | Solusi Masa Depan</title>
-    <!-- Import Google Fonts buat typography yang lebih elegan -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Import FontAwesome buat ikon-ikon keren -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- External CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <title>Aplikasi Login Keren</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animasi untuk notifikasi alert */
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        .toast-enter { animation: slideIn 0.3s forwards; }
+        .toast-exit { animation: slideOut 0.3s forwards; }
+
+        /* Animasi Confetti */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+        
+        /* Glassmorphism efek untuk form */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 min-h-screen flex items-center justify-center font-sans overflow-hidden">
 
-    <!-- NAVIGASI -->
-    <nav>
-        <div class="logo">DAVA<span>CORP</span></div>
-        <ul>
-            <li><a href="#beranda">Beranda</a></li>
-            <li><a href="#tentang">Tentang Kami</a></li>
-            <li><a href="#layanan">Layanan</a></li>
-            <li><a href="#kontak">Kontak</a></li>
-        </ul>
-    </nav>
+    <!-- Wadah untuk Notifikasi (Alert Kustom) -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2"></div>
 
-    <!-- HERO SECTION (BERANDA) -->
-    <section id="beranda" class="hero">
-        <h1>Inovasi Untuk Masa Depan</h1>
-        <p>Dava Corporation hadir untuk membantu bisnis Anda berkembang melalui solusi teknologi dan strategi digital yang revolusioner.</p>
-        <a href="#layanan" class="btn">Lihat Layanan Kami</a>
-    </section>
-
-    <!-- TENTANG KAMI SECTION -->
-    <section id="tentang" class="section-padding">
-        <h2 class="section-title">Tentang Kami</h2>
-        <div class="about-content">
-            <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Tim Dava Corporation">
-            </div>
-            <div class="about-text">
-                <p><strong>Dava Corporation</strong> didirikan dengan satu visi utama: Menjadi katalisator pertumbuhan bagi bisnis di era digital. Kami percaya bahwa setiap masalah memiliki solusi inovatif yang menunggu untuk ditemukan.</p>
-                <p>Dengan tim yang terdiri dari para profesional muda yang berdedikasi, kami menggabungkan kreativitas, teknologi, dan strategi bisnis untuk menghasilkan produk dan layanan yang tidak hanya fungsional, tetapi juga memberikan dampak nyata bagi klien kami.</p>
-                <a href="#kontak" class="btn" style="margin-top: 15px;">Mari Berdiskusi</a>
-            </div>
+    <!-- Halaman Utama (Login & Register) -->
+    <div id="auth-container" class="glass-panel p-8 rounded-2xl shadow-2xl w-full max-w-md mx-4 transition-all duration-500 relative">
+        
+        <!-- Form Login -->
+        <div id="login-view">
+            <h2 class="text-3xl font-bold text-gray-800 text-center mb-6">Masuk Dulu Bro</h2>
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="login-username">Username</label>
+                    <input class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors" type="text" id="login-username" required placeholder="Masukkan username">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="login-password">Password</label>
+                    <input class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors" type="password" id="login-password" required placeholder="Masukkan password">
+                </div>
+                <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-200">
+                    Masuk
+                </button>
+            </form>
+            <p class="text-center text-gray-600 mt-6 text-sm">
+                Belum punya akun? 
+                <button onclick="toggleView('register')" class="text-purple-600 font-bold hover:underline focus:outline-none">Daftar di sini</button>
+            </p>
         </div>
-    </section>
 
-    <!-- LAYANAN SECTION -->
-    <section id="layanan" class="services section-padding">
-        <h2 class="section-title">Layanan Kami</h2>
-        <div class="services-grid">
-            <!-- Layanan 1 -->
-            <div class="service-card">
-                <i class="fa-solid fa-code"></i>
-                <h3>Pengembangan Web</h3>
-                <p>Kami membangun website yang cepat, aman, dan responsif untuk memperkuat identitas digital brand Anda di internet.</p>
-            </div>
-            <!-- Layanan 2 -->
-            <div class="service-card">
-                <i class="fa-solid fa-chart-line"></i>
-                <h3>Konsultasi Bisnis</h3>
-                <p>Membantu memecahkan masalah operasional dan merancang strategi bisnis yang efektif untuk meningkatkan keuntungan.</p>
-            </div>
-            <!-- Layanan 3 -->
-            <div class="service-card">
-                <i class="fa-solid fa-bullhorn"></i>
-                <h3>Pemasaran Digital</h3>
-                <p>Kampanye digital terarah melalui SEO, Media Sosial, dan periklanan untuk menjangkau target audiens yang tepat.</p>
-            </div>
+        <!-- Form Register (Sembunyi by default) -->
+        <div id="register-view" class="hidden">
+            <h2 class="text-3xl font-bold text-gray-800 text-center mb-6">Bikin Akun Baru</h2>
+            <form id="register-form" class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="reg-username">Username</label>
+                    <input class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-colors" type="text" id="reg-username" required placeholder="Pilih username keren">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="reg-password">Password</label>
+                    <input class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-colors" type="password" id="reg-password" required placeholder="Bikin password yang kuat">
+                </div>
+                <button type="submit" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-200">
+                    Daftar Sekarang
+                </button>
+            </form>
+            <p class="text-center text-gray-600 mt-6 text-sm">
+                Udah punya akun? 
+                <button onclick="toggleView('login')" class="text-pink-600 font-bold hover:underline focus:outline-none">Balik ke Login</button>
+            </p>
         </div>
-    </section>
+    </div>
 
-    <!-- KONTAK SECTION -->
-    <section id="kontak" class="section-padding">
-        <h2 class="section-title">Hubungi Kami</h2>
-        <div class="contact-container">
-            <div class="contact-info">
-                <h3>Mari Mulai Proyek Anda</h3>
-                <p>Punya ide cemerlang atau masalah yang butuh solusi? Jangan ragu untuk menghubungi tim Dava Corporation. Kami siap mendengarkan.</p>
-                <br>
-                <p><i class="fa-solid fa-location-dot"></i> Jl. Inovasi Teknologi No. 88, Jakarta</p>
-                <p><i class="fa-solid fa-envelope"></i> halo@davacorp.com</p>
-                <p><i class="fa-solid fa-phone"></i> +62 812 3456 7890</p>
-            </div>
-            <div class="contact-form">
-                <form onsubmit="event.preventDefault(); alert('Pesan berhasil dikirim! (Ini cuma simulasi ya bro)');">
-                    <input type="text" placeholder="Nama Lengkap" required>
-                    <input type="email" placeholder="Alamat Email" required>
-                    <textarea placeholder="Pesan atau Pertanyaan Anda..." required></textarea>
-                    <button type="submit" class="btn">Kirim Pesan <i class="fa-solid fa-paper-plane"></i></button>
-                </form>
-            </div>
+    <!-- Halaman Dashboard (Setelah Login) -->
+    <div id="dashboard-container" class="hidden text-center z-10 w-full px-4">
+        <div class="glass-panel p-10 rounded-3xl shadow-2xl inline-block max-w-2xl mx-auto transform hover:scale-105 transition-transform duration-300">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-4 drop-shadow-sm">
+                SELAMAT!
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-8" id="welcome-message">
+                Berhasil login, bro!
+            </h2>
+            <p class="text-gray-600 mb-8 max-w-md mx-auto">
+                Ini adalah halaman rahasia yang cuma bisa diakses kalau lo udah berhasil masuk. Keren kan efeknya?
+            </p>
+            <button onclick="logout()" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg hover:shadow-xl">
+                Keluar (Logout)
+            </button>
         </div>
-    </section>
+    </div>
 
-    <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2026 Dava Corporation. All Rights Reserved.</p>
-    </footer>
+    <!-- Wadah untuk Confetti -->
+    <div id="confetti-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
 
+    <script>
+        // Simulasi Database pakai localStorage (inget ya bro, ini cuma buat latihan!)
+        const USERS_DB_KEY = 'app_users_demo';
+
+        // Mengambil data user dari localStorage
+        function getUsers() {
+            const users = localStorage.getItem(USERS_DB_KEY);
+            return users ? JSON.parse(users) : [];
+        }
+
+        // Menyimpan data user ke localStorage
+        function saveUser(username, password) {
+            const users = getUsers();
+            // Cek apakah username sudah ada
+            if (users.find(u => u.username === username)) {
+                return false; // Gagal, username terpakai
+            }
+            users.push({ username, password });
+            localStorage.setItem(USERS_DB_KEY, JSON.stringify(users));
+            return true; // Berhasil daftar
+        }
+
+        // Cek kecocokan login
+        function checkLogin(username, password) {
+            const users = getUsers();
+            return users.find(u => u.username === username && u.password === password);
+        }
+
+        // Fungsi Custom Alert / Toast (Pengganti alert() bawaan)
+        function showAlert(message, type = 'success') {
+            const toastContainer = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            // Tentukan warna berdasarkan tipe
+            const bgColor = type === 'success' ? 'bg-green-500' : (type === 'error' ? 'bg-red-500' : 'bg-blue-500');
+            
+            toast.className = `${bgColor} text-white px-6 py-3 rounded-lg shadow-lg font-semibold flex items-center toast-enter`;
+            
+            // Tambah ikon
+            const icon = type === 'success' ? '✓ ' : '✕ ';
+            toast.innerText = icon + message;
+
+            toastContainer.appendChild(toast);
+
+            // Hilangkan toast setelah 3 detik
+            setTimeout(() => {
+                toast.classList.remove('toast-enter');
+                toast.classList.add('toast-exit');
+                setTimeout(() => {
+                    if (toastContainer.contains(toast)) {
+                        toastContainer.removeChild(toast);
+                    }
+                }, 300); // Tunggu animasi exit selesai
+            }, 3000);
+        }
+
+        // Fungsi Toggle antara Login dan Register view
+        function toggleView(view) {
+            const loginView = document.getElementById('login-view');
+            const registerView = document.getElementById('register-view');
+            
+            if (view === 'register') {
+                loginView.classList.add('hidden');
+                registerView.classList.remove('hidden');
+            } else {
+                registerView.classList.add('hidden');
+                loginView.classList.remove('hidden');
+            }
+        }
+
+        // Handle Form Pendaftaran
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const usernameInput = document.getElementById('reg-username').value.trim();
+            const passwordInput = document.getElementById('reg-password').value;
+
+            if (usernameInput === '' || passwordInput === '') {
+                showAlert('Isi data yang bener dong bro!', 'error');
+                return;
+            }
+
+            const success = saveUser(usernameInput, passwordInput);
+            if (success) {
+                showAlert('Mantap! Akun berhasil dibikin. Silakan login.', 'success');
+                this.reset();
+                toggleView('login');
+            } else {
+                showAlert('Waduh, username itu udah dipakai. Cari yang lain!', 'error');
+            }
+        });
+
+        // Handle Form Login
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const usernameInput = document.getElementById('login-username').value.trim();
+            const passwordInput = document.getElementById('login-password').value;
+
+            const user = checkLogin(usernameInput, passwordInput);
+
+            if (user) {
+                // LOGIC KETIKA LOGIN BERHASIL
+                showAlert('Asik, berhasil masuk!', 'success');
+                showDashboard(user.username);
+            } else {
+                // LOGIC KETIKA LOGIN GAGAL
+                showAlert('Gagal login nih. Username atau password salah!', 'error');
+                
+                // Kasih efek getar dikit di form
+                const authContainer = document.getElementById('auth-container');
+                authContainer.classList.add('animate-pulse');
+                setTimeout(() => authContainer.classList.remove('animate-pulse'), 500);
+            }
+        });
+
+        // Fungsi nampilin halaman selamat & confetti
+        function showDashboard(username) {
+            // Sembunyiin form
+            document.getElementById('auth-container').classList.add('hidden');
+            document.getElementById('login-form').reset();
+            
+            // Tunjukin dashboard
+            const dashboard = document.getElementById('dashboard-container');
+            dashboard.classList.remove('hidden');
+            document.getElementById('welcome-message').innerText = `Halo, ${username}! Selamat datang.`;
+
+            // Tembak Confetti
+            fireConfetti();
+        }
+
+        // Fungsi Logout
+        function logout() {
+            document.getElementById('dashboard-container').classList.add('hidden');
+            document.getElementById('auth-container').classList.remove('hidden');
+            
+            // Bersihin sisa confetti
+            document.getElementById('confetti-container').innerHTML = '';
+            showAlert('Udah keluar. Sampai jumpa lagi bro!', 'info');
+        }
+
+        // Efek Confetti Custom (Bikin partikel pakai JS murni)
+        function fireConfetti() {
+            const container = document.getElementById('confetti-container');
+            container.innerHTML = ''; // Reset
+            
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffa500'];
+            const amount = 100; // Jumlah kertas confetti
+
+            for (let i = 0; i < amount; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                // Randomize properti
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const left = Math.random() * 100 + 'vw';
+                const animationDuration = Math.random() * 3 + 2 + 's';
+                const animationDelay = Math.random() * 2 + 's';
+                
+                confetti.style.backgroundColor = color;
+                confetti.style.left = left;
+                confetti.style.animation = `fall ${animationDuration} ${animationDelay} linear infinite`;
+                
+                // Variasi bentuk (lingkaran atau kotak)
+                if (Math.random() > 0.5) {
+                    confetti.style.borderRadius = '50%';
+                }
+
+                container.appendChild(confetti);
+            }
+
+            // Hentikan confetti setelah 6 detik biar browser gak berat
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 6000);
+        }
+    </script>
 </body>
 </html>
