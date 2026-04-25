@@ -27,5 +27,5 @@ Karena ini cuma *frontend*, lu nggak perlu repot-repot *install* Node.js, NPM, a
 
 1. *Clone repository* ini ke laptop lu:
    ```bash
-   git clone [https://github.com/username-lu/nama-repo-lu.git](https://github.com/username-lu/nama-repo-lu.git)
->>>>>>> ed9a3133376f5753f7a92bda19ebe79a34ba0812
+   git clone [https://github.com/DavaRay13/Tugas_RPL.git](https://github.com/DavaRay13/Tugas_RPL.git)
+
