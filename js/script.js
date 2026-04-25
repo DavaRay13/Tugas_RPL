@@ -31,9 +31,9 @@ function showAlert(message, type = 'success') {
     const toast = document.createElement('div');
     
     // Tentukan warna berdasarkan tipe
-    const bgColor = type === 'success' ? 'bg-green-500' : (type === 'error' ? 'bg-red-500' : 'bg-blue-500');
+    const bgColor = type === 'success' ? 'bg-slate-900' : (type === 'error' ? 'bg-red-600' : 'bg-slate-700');
     
-    toast.className = `${bgColor} text-white px-6 py-3 rounded-lg shadow-lg font-semibold flex items-center toast-enter`;
+    toast.className = `${bgColor} text-white px-8 py-4 rounded-2xl shadow-2xl font-bold flex items-center toast-enter border border-white/10`;
     
     // Tambah ikon
     const icon = type === 'success' ? '✓ ' : '✕ ';
@@ -141,8 +141,8 @@ function fireConfetti() {
     const container = document.getElementById('confetti-container');
     container.innerHTML = ''; // Reset
     
-    const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffa500'];
-    const amount = 100; // Jumlah kertas confetti
+    const colors = ['#0f172a', '#334155', '#64748b', '#94a3b8', '#cbd5e1', '#f8fafc'];
+    const amount = 80; // Jumlah kertas confetti
 
     for (let i = 0; i < amount; i++) {
         const confetti = document.createElement('div');
